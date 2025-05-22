@@ -291,7 +291,7 @@ a.locked:hover {
 }
 
 .collapsible-wrapper.expanded .collapsible-preview {
-    max-height: 2000px;
+    max-height: 4000px;
 }
 
 .toggle-btn {

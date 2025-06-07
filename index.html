@@ -63,23 +63,23 @@ function loadLayer1() {
       shape: {
         type: "image",
         image: [
-         { src: "./svg/pain_point.svg", width: 15, height: 15 },
-          { src: "./svg/down.svg", width:15, height: 15 }
+         { src: "./image/svg/pain_point.svg", width: 15, height: 15 },
+          { src: "./image/svg/down.svg", width:15, height: 15 }
         ]
       },
-      opacity: { value: 1 },
+      opacity: { value: 0.5 },
       size: { value: particleSize, random: true },
       links: {
         enable: true,
         distance: 300,
-        color: "#0d0c0c",
-        opacity: 0.9,
+        color: "#FFFFFF",
+        opacity: 1,
         width: 2,
         triangles: {
         enable: false,
-        opacity: 0.1,
+        opacity: 1,
                 color: {
-        value: "#F70202" //
+        value: "#FFFFFF" //
     }
   }
       },
@@ -107,7 +107,7 @@ function loadLayer2() {
     background: { color: "transparent" },
 particles: {
   number: {
-    value: 20,
+    value: 10,
     density: {
       enable: true,
       area: 800
@@ -117,17 +117,17 @@ particles: {
   shape: {
     type: "image",
     image: [
-      { src: "./svg/human_robot.svg", width: 35, height: 35 },
-      { src: "./svg/result.svg", width: 35, height: 35 }
+      { src: "./image/svg/human_robot.svg", width: 35, height: 35 },
+      { src: "./image/svg/result.svg", width: 35, height: 35 }
     ]
   },
   opacity: { value: 1, random: false },  // consistent visuals
   size: { value: 40, random: false },    // remove randomness
   links: {
     enable: true,
-    distance: 300,
-    color: "#0d0c0c",
-    opacity: 0.6,
+    distance: 400,
+    color: "#FFFFFF",
+    opacity: 1,
     width: 2,
     triangles: { enable: false }         // prevent overload
   },

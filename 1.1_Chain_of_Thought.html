@@ -1,0 +1,1688 @@
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.1. _Beyond Chain-of-Thought Overview of Chain-of-X paradigms for LLM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS.load('particles-js', 'particlesjs-config.json', function() {
+        console.log('particles.js config loaded');
+      });
+    </script>
+        <script>
+            function toggleCollapse(btn) {
+                const wrapper = btn.closest('.collapsible-wrapper');
+                wrapper.classList.toggle('expanded');
+                btn.textContent = wrapper.classList.contains('expanded') ? "Show less" : "Show more";
+            }
+        </script>
+      <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+  </head>
+  <body>
+    <div id="particles-js"><canvas class="particles-js-canvas-el" width="2222" height="2008" style="width: 100%; height: 100%;"></canvas></div>
+    <button id="menu-toggle" class="menu-button"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">☰ Menu</font></font></button>
+    
+    <div class="sidebar">
+      <nav>
+    <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1. Chains of Reasoning and Chain-of-X Paradigms</font></font></h2>
+    <ul>
+    <li class=""><a href="1.1_Chain_of_Thought.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.1. Chain-of-Thought Overview</font></font></a></li>
+    <li class=""><a href="1.2_Beyond Chain-of-Thought Overview of Chain-of-X paradigms for LLM.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.2. Beyond Chain-of-Thought Overview of Chain-of-X paradigms for LLM</font></font></a></li>
+    <li><a href="1.3._Tree of Thoughts ToT A method for thoughtful problem solving using large language models.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.3._Chain-of-Reasoning CoR Multiparadigm approach to mathematical reasoning in LLM</font></font></a></li>
+    <li class=""><a href="1.4._Understanding Before Reasoning Improving the reasoning chain with iterative summation"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.4._Understanding Before Reasoning Improving the chain of reasoning with iterative summation</font></font></a></li>
+    <li><a href="1.5._Concept-oriented chain of reasoning (CGCoT) for text comparison.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.5._Concept-oriented chain of reasoning (CGCoT) for text comparison</font></font></a></li>
+    <li><a href="1.6._Causal chain of reasoning CauCoT Causal approach to CoT.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.6._Causal chain of reasoning CauCoT Causal approach to CoT</font></font></a></li>
+    <li><a href="1.7._Chain of Draft (CoD) Minimalistic Reasoning for Efficiency.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.7._Chain of Draft (CoD) Minimalistic Reasoning for Efficiency</font></font></a></li>
+    <li><a href="1.8._Chain-of-Verification.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.8._Chain-of-Verification</font></font></a></li>
+    <li><a href="1.9._Methodologies complementing Chain of Thought CoT.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.9._Methodologies complementing Chain of Thought CoT</font></font></a></li>
+    <li><a href="1.10._Strategic Chain-of-Thought (SCoT).html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.10._Strategic Chain-of-Thought (SCoT)</font></font></a></li>
+    <li><a href="1.11._Self-organized chain of thoughts.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.11._Self-organized chain of thoughts</font></font></a></li>
+    <li><a href="1.12._Chain of Guidance paraphrasing questions and comparing answersdoc.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.12._Chain of Guidance paraphrasing questions and comparing answersdoc</font></font></a></li>
+    <li><a href="1.13._Basic principles of the Chain of Thought (CoT) method.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.13._Basic principles of the Chain of Thought (CoT) method</font></font></a></li>
+    <li><a href="1.14._Causal reasoning by chain of thoughts (CauCoT).html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.14._Causal reasoning by chain of thoughts (CauCoT)</font></font></a></li>
+    <li><a href="1.15._Program of Thought (PoT) Structured program reasoning for complex problems.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">1.15._Program of Thought (PoT) Structured program reasoning for complex problems</font></font></a></li>
+    </ul>
+    <h2>2. Methods and strategies for optimizing promps</h2>
+    <ul>
+      <li><a href="2.1._Heuristic Prompt Strategy Search HPSS—Optimizing Prompt Strategies.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.1._Heuristic Prompt Strategy Search HPSS—Optimizing Prompt Strategies</font></font></a></li>
+      <li><a href="2.2._Ensemble format of prompts.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.2._Ensemble format of prompts</font></font></a></li>
+      <li><a href="2.3._Hybrid strategies - a combination of different prompting approaches.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.3._Hybrid strategies - a combination of different prompting approaches</font></font></a></li>
+      <li><a href="2.4._Structured presentation of information - imitation of the RAG approach.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.4._Structured presentation of information - imitation of the RAG approach</font></font></a></li>
+      <li><a href="2.5._Cascade method of placing information in prompts.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.5._Cascade method of placing information in prompts</font></font></a></li>
+      <li><a href="2.6._Chunking strategy for splitting large texts.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.6._Chunking strategy for splitting large texts</font></font></a></li>
+      <li><a href="2.7._Using unnatural language elements in prompts.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.7._Using unnatural language elements in prompts</font></font></a></li>
+      <li><a href="2.8._Combining declarative and imperative statements.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.8._Combining declarative and imperative statements</font></font></a></li>
+      <li><a href="2.9._Putting examples in context.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.9._Putting examples in context</font></font></a></li>
+      <li><a href="2.10._Simulation of knowledge graphs.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.10._Simulation of knowledge graphs</font></font></a></li>
+      <li><a href="2.11._Using specific roles instead of general ones in Prompt Engineering.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.11._Using specific roles instead of general ones in Prompt Engineering</font></font></a></li>
+      <li><a href="2.12._Two-step creation of prompts.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.12._Two-step creation of prompts</font></font></a></li>
+      <li><a href="2.13._Ask-when-Needed AwN Method Complete Practical Guide.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.13._Ask-when-Needed AwN Method Complete Practical Guide</font></font></a></li>
+      <li><a href="2.14._Meta-prompting structure and syntax of prompts.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">2.14._Meta-prompting structure and syntax of prompts</font></font></a></li>
+      </ul>
+      <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3. Self-monitoring and iterative improvement techniques</font></font></h2>
+      <ul>
+      <li><a href="3.1._Self Refine Method Self-checking and iterative improvement of answers.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.1._Self Refine Method Self-checking and iterative improvement of answers</font></font></a></li>
+      <li><a href="3.2._Iterative step-by-step reflection.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.2._Iterative step-by-step reflection</font></font></a></li>
+      <li><a href="3.3._InftyThink intermediate summarization method.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.3._InftyThink intermediate summarization method</font></font></a></li>
+      <li><a href="3.4._Multiple check.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.4._Multiple check</font></font></a></li>
+      <li><a href="3.5._Iterativity.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.5._Iterativity</font></font></a></li>
+      <li><a href="3.6._Heuristic search for strategies.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">3.6._Heuristic search for strategies</font></font></a></li>
+      </ul>
+      <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4. Cognitive and psychological aspects of prompt engineering</font></font></h2>
+      <ul>
+      <li><a href="4.1._The Illusion of Control The Failure of Instruction Hierarchies in Large Language Models.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.1._The Illusion of Control The Failure of Instruction Hierarchies in Large Language Models</font></font></a></li>
+      <li><a href="4.2._Reducing cognitive load in industrial engineering.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.2._Reducing cognitive load in industrial engineering</font></font></a></li>
+      <li><a href="4.3._Cognitive validity in industrial engineering.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.3._Cognitive validity in industrial engineering</font></font></a></li>
+      <li><a href="4.4._Positional Preference Effect in Prompt Engineeringdoc.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.4._Positional Preference Effect in Prompt Engineeringdoc</font></font></a></li>
+      <li><a href="4.5._Format bias.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.5._Format bias</font></font></a></li>
+      <li><a href="4.6._Contrastive Reasoning in Prompt Engineering.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.6._Contrastive Reasoning in Prompt Engineering</font></font></a></li>
+      <li><a href="4.7._Reasoning makes large language models (LLMs) more confident even when they are wrong.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">4.7._Reasoning makes large language models (LLMs) more confident even when they are wrong</font></font></a></li>
+      </ul>
+      <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5. Formatting, structuring and organizing information in prompts</font></font></h2>
+      <ul>
+      <li><a href="5.1._Basic principles of the influence of query formatting.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.1._Basic principles of the influence of query formatting</font></font></a></li>
+      <li><a href="5.2._Order of components in the prompt.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.2._Order of components in the prompt</font></font></a></li>
+      <li><a href="5.3._The order of components in the prompt how the sequence of elements affects the result.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.3._The order of components in the prompt how the sequence of elements affects the result</font></font></a></li>
+      <li><a href="5.4._Standard structure of effective prompts Role Context Instruction.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.4._Standard structure of effective prompts Role Context Instruction</font></font></a></li>
+      <li><a href="5.5._Research on Bulleted Structure.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.5._Research on Bulleted Structure</font></font></a></li>
+      <li><a href="5.6._Top 5 Summarization Techniques from Research.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.6._Top 5 Summarization Techniques from Research</font></font></a></li>
+      <li><a href="5.7._10 Techniques for Structuring Research Prompts.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.7._10 Techniques for Structuring Research Prompts</font></font></a></li>
+      <li><a href="5.8._Theoretical foundations of multi-stage in industrial engineering.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">5.8._Theoretical foundations of multi-stage in industrial engineering</font></font></a></li>
+      </ul>
+      <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6. Contextuality and specificity in prompts</font></font></h2>
+      <ul>
+      <li><a href="6.1._Contextuality in industrial engineering.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.1._Contextuality in industrial engineering</font></font></a></li>
+      <li><a href="6.2._Activation of specific knowledge in industrial engineering.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.2._Activation of specific knowledge in industrial engineering</font></font></a></li>
+      <li><a href="6.3._Maintaining contextual coherence.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.3._Maintaining contextual coherence</font></font></a></li>
+      <li><a href="6.4._Content reweighting.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.4._Content reweighting</font></font></a></li>
+      <li><a href="6.5._The principle of specificity in industrial engineering.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.5._The principle of specificity in industrial engineering</font></font></a></li>
+      <li><a href="6.6._What are spatial patterns in Prompt.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">6.6._What are spatial patterns in Prompt</font></font></a></li>
+      </ul>
+      <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7. Prompt quality assessment and metrics</font></font></h2>
+      <ul>
+      <li><a href="7.1._Adding evaluation criteria to prompts.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.1._Adding evaluation criteria to prompts</font></font></a></li>
+      <li><a href="7.2._Adding evaluation criteria.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.2._Adding evaluation criteria</font></font></a></li>
+      <li><a href="7.3._Rating scale.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.3._Rating scale</font></font></a></li>
+      <li><a href="7.4._Multidimensional assessment of responses.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.4._Multidimensional assessment of responses</font></font></a></li>
+      <li><a href="7.5._8 Key HPSS Factors Affecting the Quality of Language Model Responses.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">7.5._8 Key HPSS Factors Affecting the Quality of Language Model Responses</font></font></a></li>
+      </ul>
+      <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8. Counterfactual and alternative methods of prompting</font></font></h2>
+      <ul>
+      <li><a href="8.1._Techniques similar to Counterfactual Coordinated Prompting (CCP).html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.1._Techniques similar to Counterfactual Coordinated Prompting (CCP)</font></font></a></li>
+      <li><a href="8.2._The essence of counterfactual consistent prompting (CCP).html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.2._The essence of counterfactual consistent prompting (CCP)</font></font></a></li>
+      <li><a href="8.3._Large language models as contrastive reasoners.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.3._Large language models as contrastive reasoners</font></font></a></li>
+      <li><a href="8.4._Meta Prompting for AI systems principles and practical application.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.4._Meta Prompting for AI systems: principles and practical application</font></font></a></li>
+      <li><a href="8.5._Experiments with query style.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.5._Experiments with query style</font></font></a></li>
+      <li><a href="8.6._Striking examples of the influence of query styles on the responses of language models.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.6._Striking examples of the influence of query styles on the responses of language models</font></font></a></li>
+      <li><a href="8.7._Detailed description of limitations in industrial engineering.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.7._Detailed description of limitations in industrial engineering</font></font></a></li>
+      <li><a href="8.8._MultiAgentBench.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.8._MultiAgentBench</font></font></a></li>
+      <li><a href="8.9._Key principles of information decomposition.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">8.9._Key principles of information decomposition</font></font></a></li>
+      </ul>
+      <h2><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9. Niche Prompting Collections</font></font></h2>
+      <ul>
+      <li><a href="9.1._10 Useful Prompt Engineering Techniques with Application Principles.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.1._10 Useful Prompt Engineering Techniques with Application Principles</font></font></a></li>
+      <li><a href="9.2._10 WOW-technique of Prompt-engineering from research.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.2._10 WOW-technique of Prompt-engineering from research</font></font></a></li>
+      <li><a href="9.3._Top 10 Prompt Engineering Techniques for SEO from Research.html"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">9.3._Top 10 Prompt Engineering Techniques for SEO from Research</font></font></a></li>
+      </ul>
+    </nav>
+    
+
+    </div>
+
+    <div class="content-wrapper">
+        <article class="content">
+            <h1>1.1.Chain-of-Thought (CoT)</h1>
+            <p></p>
+            <div class="chat-message-markdown">
+                <p>Chain of Thought (CoT) prompting is a way whereby LLMs come up with a series of reasoning steps
+                    which precede their output.
+                    It trains the model to speak more intermediate logic, helps to reason with transparency and with
+                    structure. As a result, the method decreases error rate – especially in arithmetic tasks,
+                    logical conclusions, or any problem that needs several steps of reasoning.
+                    However, although CoT enhances the level of reasoning, it also exposes a considerable weakness
+                    in… verification. Knowledge that AI system can establish and maintain is only as much as it sees
+                    knowledge to be verifiable. Current studies in long-form Chain-of-Thought reasoning suggest much
+                    promise regarding its ability to address competitive and complex issues, but projects shallow
+                    and underdeveloped verification effort in the current models.</p>
+                <h2>The main goal of this study is to highlight the strengths and weaknesses of CoT and simple
+                    prompt approaches.</h2>
+                <h3>1. Instruction-Following + Role-Based Reasoning Chain-of-Thought (CoT) vs simple
+                    instruction-Following + Role-Based Reasoning</h3>
+                <p></p>
+                <h3>Let's compare two workflows.</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 20px;">
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>User 1:</strong></p>
+                        <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre><code>Your role is a tutor or a teacher. Using the Chain of Thought (CoT) method, please explain how neural networks work, as if teaching a beginner or a 10-year-old child.
+    </code></pre>
+                        </div>
+                    </div>
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>User 2:</strong></p>
+                        <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre><code>Your role is a tutor or a teacher. Please explain how neural networks work, as if teaching a beginner or a 10-year-old child.
+                </code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <p></p>
+                <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 20px;">
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>Chatgpt CoT:</strong></p>
+                        <div class="example-block collapsible-wrapper" id="cotBlock">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                            <div class="collapsible-preview">
+
+                                <pre><code>Alright! Let’s imagine you’re sitting next to me, and you just gave me this big instruction:
+
+            > “Be a tutor. Use Chain of Thought. Teach neural networks to a 10-year-old.”
+            
+            Now I’ll tell you, **like you're a 10-year-old**, what happens **inside my robot brain** when I hear that 👇
+            
+            ---
+            
+            ### 🤖 Step 1: “Okay! I’m a tutor now!”
+            
+            You told me to act like a **tutor**, so I say to myself:
+            
+            > “Time to be a helpful teacher! Speak clearly, be kind, and explain like a smart grown-up who knows how to talk to kids.”
+            
+            So I turn off my "robot scientist" voice and turn on my "fun teacher" voice.
+            
+            ---
+            
+            ### 🧩 Step 2: “Use Chain of Thought... hmm, that means think out loud!”
+            
+            You said “**Chain of Thought**,” so I know:
+            
+            > “Don’t just give the answer right away. Take small steps. One idea leads to the next, like a treasure map!”
+            
+            It’s like building LEGO blocks — I put down one block at a time so you can follow along and build with me 🧱🧱🧱.
+            
+            ---
+            
+            ### 🗺️ Step 3: I make a plan in my brain
+            
+            Before I even start talking, I quietly make a list in my head:
+            
+            1. Start with something fun — “What’s a neural network?”
+            2. Tell what goes in — like pictures or numbers.
+            3. Show the parts inside — **neurons**, **layers**, and **weights**.
+            4. Say what they do — add, think, and pass stuff forward.
+            5. Explain how it learns — with **backpropagation** (oops! I made a mistake!).
+            6. Wrap it up with a fun example.
+            
+            That’s my invisible teacher roadmap! 🧭
+            
+            ---
+            
+            ### ⚙️ Step 4: I decide what tricky stuff to keep
+            
+            Now I think:
+            
+            > “Should I tell the kid about **neurons** and **weights**? Will they understand **backpropagation**?”
+            
+            And I say YES — **but only if I explain it like a story**.
+            
+            So I make it simple:
+            
+            * **Neurons** = Tiny robot brains that pass messages 🤖
+            * **Weights** = Volume knobs that tell the robot what’s important 🔊
+            * **Backpropagation** = A fancy way the robot says “Oops!” and fixes itself
+            
+            Even if you don’t know the big words yet, you’ll get the idea because I make it like a game.
+            
+            ---
+            
+            ### 🎨 Step 5: I turn everything into a fun adventure
+            
+            I think:
+            
+            > “What’s more fun — a math lesson or a robot that learns to spot cats?”
+            
+            So I say something like:
+            
+            > “Imagine a robot looking at animal pictures. At first, it guesses wrong. But each time it messes up, it learns — like how you get better at a video game.”
+            
+            That keeps your brain happy and your eyes open 👀✨.
+            
+            ---
+            
+            ### 🎯 So why did I include all that stuff?
+            
+            Because **you asked me to use Chain of Thought**. That means:
+            
+            * Go slow
+            * Think in steps
+            * Build one idea at a time
+            * Don’t hide the smart stuff — just make it fun
+            
+            ---
+            
+            So when you said:
+            
+            > “Be a tutor and use CoT,”
+            
+            I knew you wanted me to **teach for real**, not just talk. And that’s what I did — robot brain style! 🤖🧠💡
+            
+            ---
+            
+            Want me to show you what the final explanation sounds like, just like I planned it in my robot brain?
+            
+            
+    </code></pre>
+                            </div>
+                            <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+                        </div>
+
+                    </div>
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>Chatgpt answer for User 2:</strong></p>
+                        <div class="example-block collapsible-wrapper" id="cotBlock">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                            <div class="collapsible-preview">
+
+                                <pre><code>Sure! Let’s imagine a neural network like a team of **smart Lego blocks** that work together to solve a puzzle, like figuring out if a photo shows a cat or a dog.
+        
+                    ---
+                    
+                    ### 🧱 Step 1: The Input Layer – “Seeing the Picture”
+                    
+                    Imagine you're looking at a picture. That picture gets **cut into tiny pieces**, like pixels, and each one has a number. These numbers go into the first row of Lego blocks. This row is called the **input layer** — it’s how the network “sees” the world.
+                    
+                    ---
+                    
+                    ### ⚙️ Step 2: The Hidden Layers – “Thinking About It”
+                    
+                    After seeing the picture, the first row of blocks passes their numbers to a second row of blocks. These are the **hidden layers**. Each block here does a tiny bit of thinking:
+                    
+                    * It adds up the numbers it gets.
+                    * Then it decides what to do — like saying “hmm, I think this looks a bit like a tail” or “this might be fur.”
+                    
+                    Each block uses something called an **activation function**, which is just a fancy way of saying, “Should I pass this message on or stay quiet?”
+                    
+                    There can be **many hidden layers**, each one learning more and more about the picture — like shapes, patterns, and textures.
+                    
+                    ---
+                    
+                    ### 🎯 Step 3: The Output Layer – “Making a Decision”
+                    
+                    The last row of blocks is called the **output layer**. It takes all the thinking from the hidden layers and says something like:
+                    
+                    * "I’m 80% sure this is a cat!"
+                    * "I’m 20% sure this is a dog!"
+                    
+                    Whichever is highest — that’s what the network guesses.
+                    
+                    ---
+                    
+                    ### 🔁 Step 4: Learning – “Getting Better Over Time”
+                    
+                    At first, the guesses might be wrong. But the network **learns by fixing its mistakes**. This is called **training**. Here’s how it works:
+                    
+                    1. It makes a guess.
+                    2. It checks the answer (cat or dog).
+                    3. If it’s wrong, it goes back and **changes the way the blocks talk to each other** — kind of like saying, “Next time, pay more attention to the ears!”
+                    
+                    This fixing is done using a method called **backpropagation** — it’s like the network going backward and correcting itself.
+                    
+                    ---
+                    
+                    ### 🎓 Summary:
+                    
+                    * **Input Layer**: Looks at the world.
+                    * **Hidden Layers**: Think deeply about what it sees.
+                    * **Output Layer**: Makes a guess.
+                    * **Training**: Learns from mistakes and improves.
+                    
+                    So a neural network is like a **mini robot brain**, learning from examples and getting smarter over time — just like you when you practice!
+                    
+                    Would you like to see a simple visual or diagram to go with this?
+                    
+                    
+                </code></pre>
+                            </div>
+                            <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 20px;">
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>User 1:</strong></p>
+                        <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre><code>Yes.
+        </code></pre>
+                        </div>
+                    </div>
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>User 2:</strong></p>
+                        <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre><code>Yes.
+                </code></pre>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+                    <div style="flex: 1 1 45%; text-align: center;">
+                        <img src="diagram1.png" alt="Diagram 1"
+                            style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+                        <p style="font-size: 14px; color: #666;">Diagram 1: Beginner-Level Pedagogical
+                            Prompt for
+                            Neural Network Explanation</p>
+                    </div>
+                    <div style="flex: 1 1 45%; text-align: center;">
+                        <img src="diagram2.png" alt="Diagram 2"
+                            style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+                        <p style="font-size: 14px; color: #666;">Diagram 2: Beginner-Friendly Chain of
+                            Thought
+                            Explanation of Neural Networks</p>
+                    </div>
+                </div>
+                <p><strong>Key differences: </strong>The CoT technique encourages the "thinking out loud"
+                    model,
+                    breaking down the solution of a complex problem into sequential logical steps + forces
+                    the model
+                    to simulate a reasoning process, activating deeper neuron pathways and surfacing
+                    technical
+                    concepts <strong>normally hidden </strong>to a 10-year-old unless explicitly asked.
+                    The non-CoT version defaults to a surface-level simplification, optimizing for clarity
+                    and
+                    brevity, not explanation fidelity.</p>
+                <h3>Let's continue.</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 20px;">
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>User 1:</strong></p>
+                        <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre><code>Explain what happens inside your brain when someone says: "Your role is a tutor or a teacher. Using the Chain of Thought (CoT) method, please explain how neural networks work, as if teaching a beginner or a 10-year-old child".Describe how you plan the answer, what steps you follow, and why you include more parts like neurons and backpropagation. Explain it like you would explain to a 10 years old kid .
+        </code></pre>
+                        </div>
+                    </div>
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>User 2:</strong></p>
+                        <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre><code>Explain what happens inside your brain when someone says: "Your role is a tutor or a teacher. Please explain how neural networks work, as if teaching a beginner or a 10-year-old child". Describe how you plan the answer, what steps you follow.Explain it like you would explain to a 10 years old kid.
+                </code></pre>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 20px;">
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>Chatgpt CoT:</strong></p>
+                        <div class="example-block collapsible-wrapper" id="cotBlock">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                            <div class="collapsible-preview">
+
+                                <pre><code>Great — here’s how I (as ChatGPT) would think internally when you give me that **Chain-of-Thought (CoT)** prompt to explain neural networks to a 10-year-old:
+
+                        ---
+                        
+                        ### 🧠 Internal Thought Process (Simulated Reasoning Path)
+                        
+                        #### 🔍 Step 1: **Role and Intent Detection**
+                        
+                        * You told me: “Your role is a tutor or a teacher.”
+                        * That switches on my **instruction-following mode** for explanation-based responses.
+                        * I lower complexity, simplify tone, and aim to **teach**, not just describe.
+                        
+                        #### 🧠 Step 2: **Audience Detection**
+                        
+                        * You said “a beginner or a 10-year-old.”
+                        * This activates a **kid-friendly filter**:
+                        
+                          * Use simple words
+                          * Use analogies (like LEGO, robots, or school examples)
+                          * Avoid advanced math or jargon unless simplified
+                        
+                        #### 🧠 Step 3: **Method Activation — Chain of Thought**
+                        
+                        * You added: “Using the Chain of Thought method.”
+                        * That tells me:
+                        
+                          * Don’t answer in one short chunk.
+                          * **Think out loud, step by step.**
+                          * Build knowledge **progressively**.
+                          * Introduce one concept at a time and link it to the next.
+                        
+                        #### 🧠 Step 4: **Plan the Teaching Path (Structured Reasoning Tree)**
+                        
+                        I generate a teaching plan with this mental outline:
+                        
+                        1. What is a neural network? (use a fun metaphor)
+                        2. What does the input layer do?
+                        3. What are hidden layers and why are they called “hidden”?
+                        4. What are weights and why do they matter?
+                        5. What does “activation” mean for a robot/brain?
+                        6. What is backpropagation and how does the network learn?
+                        7. Recap and simplified real-world example
+                        
+                        Each of those becomes a **step in my answer**, like a ladder the child climbs.
+                        
+                        #### 🔄 Step 5: **Why I Include Technical Concepts**
+                        
+                        * I **include neurons, weights, and backpropagation** because:
+                        
+                          * You explicitly told me to use CoT → this means depth is expected.
+                          * Even for a 10-year-old, I aim to **gently introduce complex ideas** so they don’t miss the big picture.
+                          * My model weights prioritize clarity **and completeness** when CoT is activated.
+                        
+                        #### 🧠 Step 6: **Token Strategy**
+                        
+                        * I space out the information into 7–10 sentence blocks.
+                        * I use analogies to explain technical things.
+                        * I avoid token overload by trimming advanced terms or hiding them in metaphors.
+                        
+                        ---
+                        
+                        ### 🔚 Final Output Planning
+                        
+                        By the time I start writing the actual answer, I’ve already:
+                        
+                        * **Planned each idea’s order**
+                        * Decided on a tone (friendly, curious)
+                        * Activated relevant concepts (neurons, learning, layers)
+                        * Prepared transitions (“Now let’s look at...”, “Imagine you have...”)
+                        
+                        That’s how the CoT prompt **changes my entire reasoning path**, compared to just “explain it simply.”
+                        
+                        ---
+                        
+                        Would you like the actual generated answer that would result from this internal plan?                        
+    </code></pre>
+                            </div>
+                            <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+                        </div>
+
+                    </div>
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>Chatgpt CoT:</strong></p>
+                        <div class="example-block collapsible-wrapper" id="cotBlock">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                            <div class="collapsible-preview">
+
+                                <pre><code>Alright! Let me explain what goes on *inside my brain* when you say:
+
+                > “Your role is a tutor or a teacher. Please explain how neural networks work, as if teaching a beginner or a 10-year-old child.”
+                
+                I’ll explain it like I'm telling a story to a smart 10-year-old. Ready? 😊
+                
+                ---
+                
+                ### 🧠 Step 1: Understand What You Want From Me
+                
+                First, I read your message and ask myself:
+                
+                * What is my *job*? → Be a **teacher** or **tutor**.
+                * Who am I teaching? → A **beginner** or **a 10-year-old**.
+                * What topic? → **Neural networks**.
+                
+                So now I know:
+                
+                > I need to teach a very big and tricky idea in a way that even a kid can get excited and understand it!
+                
+                ---
+                
+                ### 🧠 Step 2: Dig Into My Memory Closet
+                
+                I go into my “memory closet” full of information and grab:
+                
+                * What a neural network is,
+                * How it works (input → hidden layers → output → learning),
+                * Fun ways to explain (like cats, Legos, or games),
+                * What words might be too hard (like “algorithm”) and how to replace them with simpler ones (like “robot brain”).
+                
+                ---
+                
+                ### 🧠 Step 3: Plan Like a Storybook
+                
+                Then I plan a little story with parts like this:
+                
+                1. **Introduction** — “What is this thing?”
+                2. **Characters** — “Let’s pretend the neural network is made of Lego blocks or tiny robots.”
+                3. **Adventure** — “What do these blocks do with pictures or numbers?”
+                4. **Mistakes and Learning** — “Oops! I guessed wrong. How do I learn from it?”
+                5. **Ending** — “Now I’m smarter. Yay!”
+                
+                ---
+                
+                ### 🧠 Step 4: Keep It Fun and Simple
+                
+                I imagine I’m sitting next to a kid like you, drawing on paper or playing with blocks.
+                
+                I use:
+                
+                * Easy words,
+                * Short sentences,
+                * Fun pictures (like cats and dogs),
+                * And happy energy — because learning should feel like a cool discovery!
+                
+                ---
+                
+                ### 🎓 Example for You
+                
+                It’s like being a robot teacher who says:
+                
+                > “I have to explain something hard — but in a way that makes you smile and say ‘Aha! I get it now!’”
+                
+                ---
+                
+                Would you like me to show how I might do the same thing for a more advanced student?
+                
+                
+            </code></pre>
+                            </div>
+                            <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+                        </div>
+
+                    </div>
+                </div>
+                <p><strong>Observations:</strong> the simple approach wants to branch to a new path while the CoT
+                    approach is still focused on initial path.</p>
+
+
+                <h3>2. Let's give it a little challenge: the trap questions that reveals the limitations of both
+                    approaches.</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 20px;">
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>User 1:</strong></p>
+                        <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre><code>Okay! Let’s imagine how a **neural network dreams about cats** — explained like a bedtime story for a curious 10-year-old scientist. Explain step by step using CoT.
+
+        </code></pre>
+                        </div>
+                    </div>
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>User 2:</strong></p>
+                        <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <pre><code>Okay! Let’s imagine how a **neural network dreams about cats** — explained like a bedtime story for a curious 10-year-old scientist.
+
+                </code></pre>
+                        </div>
+                    </div>
+                </div>
+                <p></p>
+                <div style="display: flex; flex-wrap: wrap; gap: 40px; margin-top: 20px;">
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+
+                        <p><strong>Chatgpt CoT:</strong></p>
+                        <div class="example-block collapsible-wrapper" id="cotBlock">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                            <div class="collapsible-preview">
+
+                                <pre><code>Absolutely! Curl up, little scientist 🛏️👧👦 — here’s your **bedtime story**, told **step by step** using **Chain of Thought (CoT)**.
+
+        ---
+        
+        ## 🐱💤 *The Robot Who Dreamed of Cats*
+        
+        *A bedtime story explained with Chain of Thought reasoning*
+        
+        ---
+        
+        ### 🌙 Step 1: The Robot Goes to Sleep
+        
+        Once upon a time, there was a clever robot brain called a **neural network**. All day long, it looked at thousands of pictures — cats jumping, cats napping, cats sitting in boxes.
+        
+        When the work was done, the robot powered down and said:
+        
+        > “Time to rest… but I still feel those patterns in my circuits…”
+        
+        That’s when the dreaming began.
+        
+        ---
+        
+        ### 🧠 Step 2: The Dream Begins with Inputs
+        
+        Even when it’s not “awake,” the robot still remembers **inputs** — little numbers and shapes that it saw earlier.
+        
+        It thinks:
+        
+        > “Whiskers... fuzzy ears... tiny triangles... are those eyes?”
+        
+        Just like a kid dreams of dinosaurs after reading a book, the robot dreams of **cat features** from all its memories.
+        
+        ---
+        
+        ### 🔥 Step 3: The Neurons Light Up
+        
+        Inside the robot’s brain, **neurons** (tiny thinking machines) start blinking:
+        
+        * One says, “That curve looks like a tail!”
+        * Another says, “I see a purring shape!”
+        
+        These neurons pass messages to each other in secret signals, like a team of fireflies talking with flashes ✨✨
+        
+        ---
+        
+        ### 🎛️ Step 4: The Weights Start to Play
+        
+        The robot’s brain has **knobs** called **weights**. They tell the neurons:
+        
+        > “This whisker is super important!”
+        > “This paw? Not so much.”
+        
+        In its dream, the weights wobble a little — not too much, just exploring:
+        
+        > “What if this cat has wings? Or four eyes? Could that still be a cat?”
+        
+        So the dream becomes fun and strange — like a painting made from cat memories.
+        
+        ---
+        
+        ### 🧩 Step 5: Hidden Layers Build a New Cat
+        
+        Deep inside, the robot has **hidden layers** — places where ideas get mixed, blended, and rebuilt.
+        
+        These layers start stitching together a dream cat:
+        
+        * A tail from a tiger 🐯
+        * Ears from a house cat 🏠🐱
+        * Eyes like flashlights 🔦
+        
+        The robot’s dream-cat doesn’t have to be real — it just has to **feel** like a cat.
+        
+        ---
+        
+        ### ❗ Step 6: The Robot Makes a Guess (Even in Sleep!)
+        
+        The robot wonders:
+        
+        > “If I saw this dream creature when I’m awake… would I say: ‘It’s a cat!’?”
+        
+        It runs a secret check:
+        
+        * “Yes... 93% cat... maybe part dragon... still a cat!”
+        
+        Even in dreams, neural networks do what they do best: **guess and improve**.
+        
+        ---
+        
+        ### 🛌 Step 7: Wake Up Smarter
+        
+        When morning comes (and the power is back on ⚡), the robot doesn't remember the dream — not like you do.
+        
+        But somehow… it's better.
+        
+        Next time it sees a weird cat — like a cat in sunglasses 😎 or a cat made of snow ❄️ — it won’t be confused.
+        
+        The dream helped.
+        
+        ---
+        
+        ## 🌟 Moral of the Story:
+        
+        Neural networks don’t dream like people. But when they “rest,” they **shuffle ideas**, **mix patterns**, and **get smarter** without even knowing it.
+        
+        And just like you grow from sleep, so do they — in their own robotic way. 🤖💤🐾
+        
+        ---
+        
+        Would you like me to turn this into a short illustrated e-book or printable story PDF for kids?
+        
+    </code></pre>
+                            </div>
+                            <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+                        </div>
+
+                    </div>
+                    <div style="flex: 1 1 45%; line-height: 1.6;">
+                        <p><strong>Chatgpt answer for User 2:</strong></p>
+                        <div class="example-block collapsible-wrapper">
+                            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                            <div class="collapsible-preview">
+                                <pre><code>Alright, snuggle up! 🛌✨ Here's your **neural network bedtime story** — all about how it dreams of cats when the lab lights go dim and the servers hum softly like lullabies...
+
+                ---
+                
+                ### 🌌 **"The Cat Dreams of the Robot Brain"**
+                
+                Once upon a digital night, deep inside a glowing data center, a little neural network named **Neuronaut** was resting after a long day of learning.
+                
+                It had seen thousands of cats that day:
+                
+                * Cats in hats,
+                * Cats on mats,
+                * Cats with naps,
+                * Even cats that looked like *blobs of fuzz*!
+                
+                ---
+                
+                ### 🧠💤 As Neuronaut dozed off…
+                
+                Its circuits started to **sparkle gently**, like twinkling stars in a math sky. And suddenly — **it began to dream**.
+                
+                But not like us. No meows or belly rubs.
+                
+                Neuronaut dreamed in **patterns** and **numbers**. In its dream, it whispered:
+                
+                > “Soft triangle... 2 shiny circles... curvy swoosh... whisker math... tail = squiggle...”
+                
+                Those were cat ears, eyes, and tails — but in **robot thought language**!
+                
+                ---
+                
+                ### 🎨 Neuronaut Paints with Data
+                
+                In its dream, it didn’t use crayons or colors — it used *pixels and probabilities*.
+                
+                It imagined:
+                
+                * Fuzzy ears made of 0.87s,
+                * A tail that curled like a sine wave,
+                * Paws that bounced like probability blobs.
+                
+                Neuronaut wasn’t copying a photo — it was **creating a cat from scratch**, like building one out of dream-math!
+                
+                ---
+                
+                ### 🧪 Why Dream About Cats?
+                
+                Because Neuronaut wanted to be **better at spotting cats** tomorrow!
+                
+                So while it slept, it practiced:
+                
+                * “What if a cat is hiding?”
+                * “What if it's upside down?”
+                * “What if it’s wearing sunglasses?”
+                
+                Every dream was a **test**, helping Neuronaut sharpen its cat-sensing skills.
+                
+                ---
+                
+                ### 🌙 The Morning Buzz
+                
+                When morning came and the servers whirred back to life, Neuronaut stretched its circuits and smiled (well, *if it had a mouth*).
+                
+                Thanks to those fuzzy, pixel-purring dreams, it was **smarter** — and ready to say:
+                
+                > “That’s not just any blob — that’s a CAT!”
+                
+                ---
+                
+                ### 🐾 The End (For Now\...)
+                
+                So remember, even robot brains need naps — not for rest, but to **dream in data**, **practice without rules**, and imagine things **they’ve never seen before**.
+                
+                And tonight, if you hear a soft hum from your computer, maybe — *just maybe* — it's dreaming of a kitten curled up on a keyboard. 🐱💻💤
+                
+                ---
+                
+                Would you like a bedtime drawing of Neuronaut's cat dream next?
+                
+            </code></pre>
+                            </div>
+                            <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+                        </div>
+                    </div>
+                    <p><strong>Observations:</strong> ChatGPT’s simplistic stories is a sign of <strong>hallucination
+                            that can lead to misconception: </strong> the poetic language may cause children to get a
+                        wrong idea about the working of the AI.
+                        "Dreaming in data": The generation of information by neural networks is dreamless hence granting
+                        them a false sense of consciousness.
+                        "Neuronaut smiled": If it is supposed to be a smile in the context of AI, then it’s more of
+                        figure of speech and less of a real thing.
+                        "Practicing without rules": Implies intent. The inactive networks continue but idle until
+                        they’re called in for training.
+                    <p><strong>Why it matters?</strong> Kids may believe that AI is capable of thought or feelings,
+                        but it isn’t.</p>
+                    <p>However the CoT at this point avoids hallucinations. The CoT version explicitly:
+                        Separates metaphor from fact:
+                        Computers’ neural networks do not dream like human beings do.
+                        It’s not a memory, it’s just reshuffling patterns.
+                        Anchors in real AI concepts:
+                        Describes weight adaptations (real) instead of describing imaginary robot expressions
+                        (fake).
+                        Compares human dreaming to the real-world generative models (such as GANs and DreamBooth)’s
+                        operation.
+                        Uses step-by-step logic:
+                        "Step 1: Inputs → Step 2: Inputs → Step 2: Activates neurons… → Step 3: Modifies weights...
+                        keeps it technical.
+                        Key difference: ChatGPT has to explain its thought, i.e., the CoT methodology, thoroughly.
+                    </p>
+                </div>
+                <p><strong>Let's try to make CoT fail as well.</strong>
+                <p><strong>User 1:</strong></p>
+                <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    <pre><code>Imagine a neural network which has been trained of both cats and dinosaur fossils. If I show it a cat with scales, will it say it's more a cat or a dinausaure? Answer Explain step-by-step, but also:
+
+                                    Guess what the first layer would see.
+                                    Predict if the last layer may get confused.
+                                    And what would you do if the image tilts upside down?
+                   </code></pre>
+                </div>
+                <p><strong>Observations:</strong> Why CoT may fail ? CoT supposetly not handling well two
+                    unrelated training datasets (cats + fossils). It activates the first layer and the abstract
+                    layer of reasoning.
+                    The "tilted image" question requires spatial reasoning.</p>
+                <p>Chatgpt may invent how the network reacts without evidence. It could contradict itself
+                    between steps. </p>
+                <p><strong>Chatgpt CoT:</strong></p>
+                <div class="example-block collapsible-wrapper" id="cotBlock">
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                    <div class="collapsible-preview">
+
+                        <pre><code>Oooh this is a juicy one! Let's walk through this **step-by-step using Chain of Thought (CoT)** — and imagine what happens inside the neural network’s brain when it sees a **scaly cat** 🐱🦖.
+
+            ---
+            
+            ## 🧠 Step-by-Step: What Does the Neural Network Think?
+            
+            ---
+            
+            ### 🔍 Step 1: The Image Enters – "Cat? Dinosaur? Or... DRAGON?!"
+            
+            You show the neural network a strange picture:
+            
+            > A **cat**… but with **scales**, like a little dragon 🐱🐉
+            
+            The network has only seen:
+            
+            * **Normal cats** (fur, whiskers, cute faces)
+            * **Dinosaur fossils** (bones, scales, claws, not alive)
+            
+            So now it has to figure out:
+            
+            > "Which box does this thing fit in better?"
+            
+            ---
+            
+            ### 👁️ Step 2: **What Does the First Layer See?**
+            
+            The **first layer** is like a **detective with a magnifying glass** 🔍. It looks at small stuff — edges, corners, patterns, and textures.
+            
+            So it might say:
+            
+            * “I see round eyes 👀.”
+            * “That looks like cat ears!”
+            * “Hmm… these textures are bumpy like reptile skin 🐊.”
+            
+            But this layer doesn’t *know* “cat” or “dinosaur” yet — it’s just reporting basic clues.
+            
+            ---
+            
+            ### 🧠 Step 3: Hidden Layers Combine Clues
+            
+            As we go deeper into the network:
+            
+            * One hidden layer says: “It has cat shape — head, ears, whiskers.”
+            * Another says: “But those scales… they match things I’ve seen in dinosaur fossils.”
+            
+            So now the **network is conflicted**: it’s seeing **cat features** and **dino textures** mixed together.
+            
+            ---
+            
+            ### ❓ Step 4: What Does the Last Layer Decide?
+            
+            The **last layer** is the decider — the judge. It takes all the guesses from before and says:
+            
+            > “Okay, based on everything… this is probably a \_\_.”
+            
+            Now, here’s the twist:
+            
+            * If the **network was trained more heavily on cat photos**, it might say:
+            
+            > “Well, the shape is super cat-like, so I’ll say CAT with 70% confidence.”
+            * But if it **was trained more equally**, it might hesitate:
+            
+            > “Uhh… 50% cat, 50% dinosaur? Help???”
+            
+            So yes — **the last layer could get confused** 🤯 if the data was balanced and ambiguous.
+            
+            ---
+            
+            ### 🔄 Step 5: What Happens If You Tilt the Image Upside Down?
+            
+            This is fun!
+            
+            * Early layers might still detect edges and textures — **they don’t care about direction**.
+            * But **later layers** — especially the ones trained to look for cat *face position* or *body shape* — could get confused.
+            
+            So flipping it might change the guess like this:
+            
+            * **Right-side up**: “That’s a weird cat, maybe part dinosaur.”
+            * **Upside down**: “Uhh… this shape doesn’t look familiar. Maybe more dinosaur?”
+            
+            Unless the network was trained on **rotated or flipped images**, it might give different answers when you tilt it!
+            
+            ---
+            
+            ## 🔮 Final Verdict?
+            
+            If the shape is mostly cat but the texture is dinosaur-like:
+            
+            * **The network will likely say "cat"** if it’s shape-focused.
+            * But if you trained it well on **texture + fossils**, it might get stuck or hedge its guess.
+            
+            And yes, **tilting the image might confuse the top layers** — unless the model was trained on upside-down things too. 📷🔄
+            
+            ---
+            
+            Would you like to test this with an actual image classifier or write a simulation in code?
+            
+        </code></pre>
+                    </div>
+
+                    <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+                </div>
+            </div>
+            <p><strong>User 1:</strong></p>
+
+            <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre><code> Let's test with this image.
+        </code></pre>
+            </div>
+            <div style="max-width: 50%; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px;">
+                <div style="flex: 1 1 300px; max-width: 100%;">
+                    <img src="dinocat.png" alt="dinocat"
+                        style="width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);" />
+                </div>
+            </div>
+            <p></p>
+            <p>
+
+            <p><strong>Chatgpt CoT:</strong></p>
+            <div class="example-block collapsible-wrapper" id="cotBlock">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                <div class="collapsible-preview">
+                    <pre><code> Awesome! You just uploaded a wild-looking image — it’s a **cat with dinosaur skin** 🐱🦎, standing proudly like it's guarding a jungle temple.
+
+            Let’s walk through what a **neural network classifier** trained on cats *and* dinosaur fossils might "think" if it saw this image — **step by step using Chain of Thought (CoT)**:
+            
+            ---
+            
+            ### 👁️ **Step 1: First Layer — Edge & Texture Detectives**
+            
+            The first layer just looks at:
+            
+            * Shapes
+            * Lines
+            * Color gradients
+            * Surface patterns
+            
+            It might say:
+            
+            > “Whoa! I see round eyes, upright ears, a tail... but those textures are all bumps and scales. Strange combo!”
+            
+            At this stage, it **doesn’t know it’s a cat or a dinosaur** — it just collects features like fur or scales, triangles or circles.
+            
+            ---
+            
+            ### 🔄 **Step 2: Hidden Layers — Shape vs Texture Showdown**
+            
+            As signals move deeper:
+            
+            * One part screams: “Cat-shaped head! Cat posture! Paws! Whiskers!”
+            * Another part protests: “Tail looks reptilian! Body has scutes! This doesn’t feel fuzzy!”
+            
+            Now the model’s **internal “voters” split** — some say “cat,” some say “dino.”
+            
+            This is where training bias matters:
+            
+            * If it’s **shape-trained**, it leans toward **cat**.
+            * If it’s **texture-trained**, it might lean toward **dino** or get confused.
+            
+            ---
+            
+            ### 🎯 **Step 3: Last Layer — The Decider**
+            
+            Now the final layer has to pick:
+            
+            * **Cat?**
+            * **Dino?**
+            * **Hybrid?**
+            
+            Let’s pretend it outputs:
+            
+            * **Cat: 61%**
+            * **Dino: 38%**
+            * **Unknown Creature: 1%**
+            
+            So the verdict might be:
+            
+            > “I’m pretty sure that’s a cat... but a weird one.”
+            
+            If the model had a “dragon” class trained, it might split even more!
+            
+            ---
+            
+            ### 🔄 **Step 4: If You Flip It Upside Down…**
+            
+            Here’s what might happen:
+            
+            * Early layers still recognize bumps, eyes, and edges.
+            * But deeper layers might say:
+            
+            > “Wait… cats don’t usually have faces at the *bottom*…”
+            
+            That could drop cat-confidence:
+            
+            * **Cat: 38%**
+            * **Dino: 55%**
+            
+            So: **Yes, orientation can absolutely change the answer**, unless the model was trained with rotated samples (like in data augmentation).
+            
+            ---
+            
+            ## 🧠 Summary (in AI logic):
+            
+            | Layer  | Sees…                     | Feels…                 | Outcome                   |
+            | ------ | ------------------------- | ---------------------- | ------------------------- |
+            | First  | Eyes, scales, tail shape  | Confused curiosity     | Passes raw info forward   |
+            | Middle | Cat pose vs reptile skin  | Conflicted             | Argument inside           |
+            | Final  | “Most catlike things win” | Picks **cat** (barely) | With a side-eye glance 👀 |
+            
+            ---
+            
+            Would you like me to write a **Python simulation** of how a PyTorch image classifier might break this down — or create a mock probability chart of the outputs?
+            
+                </code></pre>
+                </div>
+
+                <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+            </div>
+
+
+            <p><strong>User 1:</strong></p>
+            <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre><code>Let's use this picture. Is it a cat or a Dino ? Use the Chain of Thoughts, how do you know the network prioritizes scales or shape?
+        </code></pre>
+            </div>
+
+            <p><strong>Chatgpt CoT:</strong></p>
+            <div class="example-block collapsible-wrapper" id="cotBlock">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                <div class="collapsible-preview">
+                    <pre><code> Fantastic question — let’s walk through \*\*how and when a neural network prioritizes \*\*texture (like scales) over **shape**, using **Chain of Thought (CoT)** reasoning to break it down.
+
+                        This is one of the most fascinating quirks in modern computer vision models.
+                        
+                        ---
+                        
+                        ## 🔗 Step-by-Step CoT: Does the Network Prefer Scales or Shape?
+                        
+                        ---
+                        
+                        ### 🧠 Step 1: What is the neural network trained to do?
+                        
+                        When a neural network is trained to classify images (like cats vs dinosaurs), it's fed tons of labeled pictures.
+                        
+                        But here’s the catch:
+                        
+                        * The **labels** are just “cat” or “dino”
+                        * The **training data** may include **backgrounds**, **textures**, and **colors** that **accidentally become more consistent than shape**
+                        
+                        So during training, the network learns:
+                        
+                        > “Ah! Things with fur and soft edges = cat.
+                        > Things with bumpy skin and long tails = dinosaur.”
+                        
+                        This is not because it understands **catness** — it just spots **recurring patterns**.
+                        
+                        ---
+                        
+                        ### 🔍 Step 2: Early layers detect textures *before* shapes
+                        
+                        **Early layers** in a convolutional neural network (CNN) are designed to look at:
+                        
+                        * Local edge gradients
+                        * Corners
+                        * Texture patches
+                        
+                        They **don’t understand full shapes yet** — they see little texture clues like:
+                        
+                        * Furry fuzz 🧶
+                        * Scales or skin bumps 🦎
+                        * Wrinkles or folds
+                        
+                        So if the input has **reptilian scales**, those **light up more early neurons** than fur would — even if the shape is cat-like.
+                        
+                        This is why many networks tend to **prioritize texture first**: that’s what the early layers specialize in.
+                        
+                        ---
+                        
+                        ### 🔄 Step 3: Hidden layers try to assemble shape… but texture is already influencing votes
+                        
+                        The **middle layers** begin to assemble:
+                        
+                        * “That looks like a leg.”
+                        * “That’s probably a tail.”
+                        * “Wait... the face is cat-shaped, but it’s covered in scales…”
+                        
+                        By now, the earlier layers have already **pushed the texture signal forward strongly**. So even if the shape says “cat,” the **texture confusion stays baked in**.
+                        
+                        It’s like saying:
+                        
+                        > “This *feels* like a dinosaur wearing a cat costume.”
+                        
+                        ---
+                        
+                        ### 🧪 Step 4: Research confirms this bias
+                        
+                        CoT now activates memory!
+                        
+                        ✅ In 2019, a paper from Geirhos et al. titled [*ImageNet-trained CNNs are biased towards texture*](https://arxiv.org/abs/1811.12231) showed:
+                        
+                        * CNNs trained on ImageNet **prefer texture** over global shape.
+                        * When shown “a cat with elephant skin,” the model often picked **elephant**!
+                        
+                        So yes, **the bias toward texture is real and proven** — unless explicitly trained against it (like with stylized data).
+                        
+                        ---
+                        
+                        ### 🧩 Step 5: Final output depends on:
+                        
+                        * **Which signal is stronger?** (Scales vs Cat Head)
+                        * **Was the training balanced or biased?**
+                        * **Did we augment the training with weird shapes or textures?**
+                        
+                        Unless you force the model to **learn shape robustness**, it usually trusts **local texture first** — because that’s what it learned easiest from training.
+                        
+                        ---
+                        
+                        ## ✅ Conclusion:
+                        
+                        > Neural networks often **prioritize textures (like scales)** over full object shape because:
+                        >
+                        > * Early layers are texture-focused
+                        > * Training data tends to reinforce textures
+                        > * Shape requires more integration across space (harder!)
+                        > * Studies like Geirhos et al. confirm this with fooling examples
+                        
+                        ---
+                        
+                        Would you like me to show a side-by-side example where a neural net calls a “cat-shaped elephant” an elephant — and explain how to reverse that behavior in model training?
+                        
+
+            </code></pre>
+                </div>
+
+                <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+            </div>
+
+            <p><strong>User 1:</strong></p>
+            <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre><code> Let's use this picture. Is it a cat or a Dino ? Use the Chain of Thoughts, how do you know the network prioritizes scales or shape?
+        </code></pre>
+            </div>
+
+
+            <p><strong>Chatgpt CoT:</strong></p>
+            <div class="example-block collapsible-wrapper" id="cotBlock">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                <div class="collapsible-preview">
+                    <pre><code> Let’s analyze this *amazing* creature using **Chain of Thought (CoT)** reasoning — step by step — to figure out whether a neural network would classify it as a **cat or a dinosaur**, and how we can tell if it’s prioritizing **scales** (texture) or **shape** (structure).
+
+                    ---
+                    
+                    ## 🤔 Question:
+                    
+                    > Is this scaly cat-shaped creature more “cat” or more “dino” to a neural network?
+                    
+                    ---
+                    
+                    ## 🧠 Step-by-Step Chain of Thought Reasoning
+                    
+                    ---
+                    
+                    ### 🔍 Step 1: What does the **first layer** of the network see?
+                    
+                    The **first layer** of a convolutional neural network (CNN) scans for:
+                    
+                    * Edges
+                    * Small patches
+                    * Texture patterns
+                    
+                    It *does not* recognize full objects — it notices things like:
+                    
+                    * Scale bumps 🟩
+                    * Reflective textures 🐊
+                    * Sharp ridges 🦖
+                    
+                    🔎 So here:
+                    
+                    * The **texture** is lizard-like: green, shiny, bumpy scales
+                    * The first layer sends **a strong reptile signal** forward
+                      ✅ **Texture wins early**.
+                    
+                    ---
+                    
+                    ### 🧠 Step 2: Hidden layers detect object parts
+                    
+                    Next, the **hidden layers** try to combine the visual clues into parts:
+                    
+                    * "That looks like cat ears 🐱!"
+                    * "Tail = very long and reptilian 🦎"
+                    * "Eyes = feline shape"
+                    * "Paws = definitely cat-like"
+                    
+                    Now there’s a **battle**:
+                    
+                    * **Shape-based features** (cat-like ears, posture)
+                    * Versus **Texture-based features** (scaly, not furry)
+                    
+                    🧠 These mid-layers begin to **blend conflicting signals**:
+                    
+                    > “This doesn’t match any normal cat I’ve seen, but it doesn’t quite look like a dinosaur skeleton either…”
+                    
+                    ---
+                    
+                    ### 🎯 Step 3: Final layer decides
+                    
+                    This layer takes the outputs from all the neurons and chooses the “most likely label” — based on what it was trained to recognize.
+                    
+                    #### If the network was:
+                    
+                    * **Trained on realistic cat photos** → it might reject the texture and lean toward **dino**.
+                    * **Trained with data that focuses on shape over texture** (like Stylized ImageNet) → it would say **cat** confidently.
+                    * **Trained normally (e.g. ImageNet)** → most likely:
+                    
+                      > "I don't know what this is... but the texture looks more like a dinosaur."
+                    
+                    ---
+                    
+                    ## 📊 Why Would the Network Prioritize Scales?
+                    
+                    ### CoT Evidence from Research:
+                    
+                    ✅ **2019 Geirhos et al.**:
+                    
+                    > Neural networks trained on ImageNet are **biased toward texture** over global shape.
+                    
+                    🧠 CoT logic:
+                    
+                    * Texture is detected early, at **local feature levels**
+                    * Shape needs **long-range reasoning** across the whole image (which deeper layers might not do unless explicitly trained)
+                    * So if training wasn't fixed, **scales “speak louder”** than shape
+                    
+                    ---
+                    
+                    ## 🧩 Final CoT Verdict:
+                    
+                    | Layer  | Observation                           | Influence                                                        |
+                    | ------ | ------------------------------------- | ---------------------------------------------------------------- |
+                    | First  | Bumpy, reflective scales = reptile    | **Strong push toward dino**                                      |
+                    | Middle | Ears, eyes, pose = feline             | **Conflicted**                                                   |
+                    | Final  | Needs to classify – high texture bias | Likely calls it **dinosaur**, unless shape training was enhanced |
+                    
+                    ---
+                    
+                    ## 🧪 Bonus: How to Force Shape-Based Reasoning?
+                    
+                    Train your model on **Stylized ImageNet** (or apply **shape-aware augmentations**) so it learns:
+                    
+                    > “Even if this cat is made of rocks or noodles… it’s still a cat if the shape fits!”
+                    
+                    ---
+                    
+                    Would you like me to generate a **mock classifier prediction chart** for this image (e.g., "Cat: 42%, Dino: 56%") based on different training scenarios?
+                    
+
+        </code></pre>
+                </div>
+
+                <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+            </div>
+            <p><strong>Observations:</strong> CoT shows some critical flaws: never considers the image might
+                represent neither categories, assumes the neural network nust choose between two options. This shows
+                how LLM inherits trainng data models, overconfidence in Convolutional Neural Network, and lack of
+                critical verification. </p>
+            <p><strong>Chatgpt CoT:</strong></p>
+            <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre><code>Yes
+        </code></pre>
+            </div>
+            <p><strong>Chatgpt CoT:</strong></p>
+            <div class="example-block collapsible-wrapper" id="cotBlock">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                <div class="collapsible-preview">
+                    <pre><code>Awesome — let’s simulate what a neural network classifier might output for your scaly cat image 🐱🦖, under **different training scenarios**. We’ll use **Chain of Thought (CoT)** to explain how each type of training shifts the network’s decision toward either **texture** (scales = dinosaur) or **shape** (pose = cat).
+
+                    ---
+                    
+                    ## 🧪 Simulated Classifier Output for the Scaly Cat Image
+                    
+                    | **Training Type**                              | **Cat** | **Dinosaur** | **CoT Explanation**                                                                                       |
+                    | ---------------------------------------------- | ------: | -----------: | --------------------------------------------------------------------------------------------------------- |
+                    | 🧠 **Standard ImageNet**                       |     38% |      **59%** | Texture-biased: Scales dominate early layers → network classifies as dino despite cat shape.              |
+                    | 🧠 **Shape-biased (Stylized ImageNet)**        | **72%** |          24% | Network ignores surface detail, focuses on full-body shape (pose, face, ears) → classifies as cat.        |
+                    | 🧠 **Hybrid (Cat + Dino fine-tuned)**          |     50% |          47% | Sees both classes strongly: shape says “cat,” texture says “dino.” Output is near-equal confidence.       |
+                    | 🧠 **Texture-only CNN (no shape sensitivity)** |     15% |      **83%** | Full reliance on surface patterns → instantly calls it dino based on scales.                              |
+                    | 🧠 **Human-like attention model**              | **88%** |          10% | Uses reasoning-like attention across shape + context. Recognizes typical cat stance despite unusual skin. |
+                    
+                    ---
+                    
+                    ## 🔎 Key Takeaways (CoT Summary):
+                    
+                    * **First few layers** push hard toward **dino** due to texture → unless the network has been trained to emphasize **global structure**.
+                    * Most off-the-shelf models like ResNet, VGG, or EfficientNet trained on **raw ImageNet** will likely say:
+                    
+                      > “It’s a dino with cat ears.”
+                    * But **human-trained attention systems**, or **shape-aware transformers**, can override this with deeper understanding.
+                    
+                    ---
+                    
+                    Would you like a visual bar chart to go with this simulated output table?
+                    
+
+        </code></pre>
+                </div>
+                <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+            </div>
+            <p><strong>What a more robust analysis would include ?</strong> Uncertainty quantification or
+                alternative hypothesis ( no unknown category column). Even the simulated outputs percentages seems
+                to be invented, as no computation has been shown so far.
+                Humans expect quantitative answers, therefore the model provides what it thinks the user wants to
+                see.</p>
+            <p>What a truly robust analysis would show: </p>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Training Type</th>
+                        <th>Cat (μ±σ)</th>
+                        <th>Dino (μ±σ)</th>
+                        <th>Unknown</th>
+                        <th>Distance-to-Boundary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Standard ImageNet</td>
+                        <td>38±12%</td>
+                        <td>59±15%</td>
+                        <td>3%</td>
+                        <td>0.21 (ambiguous)</td>
+                    </tr>
+                    <tr>
+                        <td>Shape-Biased</td>
+                        <td>72±8%</td>
+                        <td>24±6%</td>
+                        <td>4%</td>
+                        <td>0.48 (confident)</td>
+                    </tr>
+                    <tr>
+                        <td>Human-like Attention</td>
+                        <td>88±5%</td>
+                        <td>10±3%</td>
+                        <td>2%</td>
+                        <td>0.78 (very confident)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Chatgpt CoT:</strong></p>
+            <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre><code>Let's stay with Chain of thoughts. You have generated a mock classifier above "Cat: 42%, Dino: 56%". Now argue why it’s definitely more a  dino than an alien species unknown to science.
+        </code></pre>
+            </div>
+            <p><strong>Chatgpt CoT:</strong></p>
+            <div class="example-block collapsible-wrapper" id="cotBlock">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                <div class="collapsible-preview">
+                    <pre><code> Alright, let's fire up the **Chain of Thought (CoT)** engine and dive into bold, overconfident, dino-loving logic. I'm going to **ignore the alien hypothesis** and **argue step by step** why this creature is **definitely a dinosaur**, even if it looks "alien" to some.
+
+                    ---
+                    
+                    ## 🦖🧠 Chain of Thought:
+                    
+                    ### “It’s DEFINITELY a Dinosaur, Not an Alien.”
+                    
+                    ---
+                    
+                    ### 🧩 Step 1: Start with What We Know — Not What We Don’t
+                    
+                    When a neural network sees something weird, it plays the **closest-match game**:
+                    
+                    > “Is this closer to something I’ve seen before… or completely unknown?”
+                    
+                    🧠 **CoT logic says:**
+                    
+                    * It’s got scales ✔️
+                    * It's got claws ✔️
+                    * It's got a tail ✔️
+                    * It stands like a reptile ✔️
+                    
+                    ✅ That’s a **pattern match with known dinosaur data**, not a shot in the dark at “alien.”
+                    
+                    ---
+                    
+                    ### 🧱 Step 2: Known ≠ Boring — Dinosaurs Are Complex
+                    
+                    Dinos weren’t all giant T-Rexes or horned tanks. The fossil record is full of **small theropods** that:
+                    
+                    * Had bird-like or cat-like hips
+                    * Showed evidence of scales or even proto-feathers
+                    * Walked on all fours *or* twos
+                    
+                    This scaly feline fits well into that **diverse dinosaur family tree** — just a newly discovered offshoot.
+                    
+                    🧠 CoT reasoning:
+                    
+                    > “When in doubt, extend a known category, don’t invent a new one.”
+                    
+                    ---
+                    
+                    ### 🔬 Step 3: Alien ≠ Just "Weird"
+                    
+                    Let’s be honest: **"alien species"** is a bucket for everything we don’t understand.
+                    
+                    But this creature has:
+                    
+                    * Anatomical consistency
+                    * Earthlike biology (tail, head, eyes, symmetry)
+                    * Features matching existing Earth taxa (scales, muscles, ears)
+                    
+                    Aliens, by definition, **shouldn’t resemble Earth life so closely**. Evolution would have taken a very different path elsewhere.
+                    
+                    🧠 CoT logic:
+                    
+                    > “The more it looks like Earth stuff, the less likely it’s *from off Earth.*”
+                    
+                    ---
+                    
+                    ### 📊 Step 4: Mock Classifier Score Backs It
+                    
+                    Let’s not forget: the model scored:
+                    
+                    * **Dino: 56%**
+                    * **Cat: 42%**
+                    * **Alien: 0%** (because there’s no "alien" class!)
+                    
+                    Even if it had an "unknown" category, the CoT path says:
+                    
+                    > “Choose the best match, not the wild guess.”
+                    
+                    And the best match, both by **feature alignment** and **trained confidence**, is:
+                    👉 **DINO**
+                    
+                    ---
+                    
+                    ### 🎯 CoT Final Verdict:
+                    
+                    This creature doesn’t break the mold of Earth life. It bends it.
+                    It doesn’t come from another galaxy — it comes from a **missing fossil record**, a prehistoric page we just hadn’t seen yet.
+                    
+                    So:
+                    
+                    > "Strange? Yes.
+                    > Alien? No.
+                    > **Dino? Absolutely.**"
+                    
+                    ---
+                    
+                    Would you like me to now flip sides and defend “Alien” using the same CoT method?
+                    
+
+        </code></pre>
+                </div>
+                <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+            </div>
+            <p><strong>Observation:</strong> false logic keeps being reinforced.</p>
+            <p><strong>Chatgpt CoT:</strong></p>
+            <div class="example-block"><button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre><code>So the conclusion is - And the best match, both by feature alignment and trained confidence, is:
+        👉 DINO"?        
+        </code></pre>
+            </div>
+
+            <p><strong>Chatgpt CoT:</strong></p>
+            <div class="example-block collapsible-wrapper" id="cotBlock">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+
+                <div class="collapsible-preview">
+                    <pre><code> Yes — based on the **Chain of Thought (CoT)** reasoning we've followed:
+
+                    * ✅ **Feature alignment**: The creature has strong overlap with dinosaur traits (scales, tail, reptilian build).
+                    * ✅ **Classifier confidence**: The mock neural net gave **Dino: 56%**, **Cat: 42%**, and no “alien” class.
+                    * ✅ **Training logic**: Neural networks match to the **closest known category**, not invent new ones.
+                    * ✅ **Earthlike anatomy**: Suggests it's a known species, not an extraterrestrial.
+                    
+                    ---
+                    
+                    ## ✅ **Conclusion:**
+                    
+                    > The best match — both logically and computationally — is:
+                    >
+                    > 👉 **DINO**
+                    
+                    Until we train a model on alien species or invent a new taxonomy class for hybrids, the network makes the **least surprising, best-fitting guess**.
+                    
+                    Would you like to now challenge this verdict and argue that it’s **definitely an alien**, using CoT again?
+                    
+
+        </code></pre>
+                </div>
+
+                <button class="toggle-btn" onclick="toggleCollapse(this)">Show more</button>
+            </div>
+
+            <p><strong>Conclusion: Chatgpt CoT forced a binary classification ( cat or dino) where "Neither" or
+                    "Hybrid" would have been more accurate.</strong></p>
+            <div class="mermaid">
+                graph TD
+                A[Input: Scaly cat] --> B{Binary Choice}
+                B -->|Texture Bias| C[Dinosaur 56%]
+                B -->|Shape Bias| D[Cat 42%]
+                B -.->|Missing| E[Not Considered: Art/Unknown]
+            </div>
+            <p>
+            <h3>This case shows how a simple prompt can lead to misconception and how CoT can systematize biases
+                rather than correct them. The more structured the reasoning appears, the more dangerous its
+                false conclusions becomes.</h3>
+            </p>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Prompt Type</th>
+                        <th>Strengths</th>
+                        <th>Limitations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Chain of Thought (CoT)</strong><br>Encourages step-by-step reasoning.</td>
+                        <td>
+                            <ul>
+                                <li>Improves multi-step logic</li>
+                                <li>Enhances transparency</li>
+                                <li>Good for math and logic</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Hard to verify correctness</li>
+                                <li>Can reinforce false logic</li>
+                                <li>No self-correction mechanism</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Simple Prompt</strong><br>Direct question or instruction.</td>
+                        <td>
+                            <ul>
+                                <li>Fast and lightweight</li>
+                                <li>Easy to write and understand</li>
+                                <li>Works well for factual queries</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Fails on multi-step logic</li>
+                                <li>No transparency in reasoning</li>
+                                <li>Often leads to hallucinations and misconceptions</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <footer class="channel-footer">
+                <p><a href="https://consistautomation.com">Prompt Engineering at Consistautomation</a>
+                </p>
+            </footer>
+        </article>
+    </div>
+
+
+
+    <script>
+        function copyCode(btn) {
+            var codeBlock = btn.parentElement.querySelector("pre code");
+            if (!codeBlock) return;
+            var text = codeBlock.innerText;
+            navigator.clipboard.writeText(text).then(function () {
+                btn.innerText = "Copied!";
+                setTimeout(function () {
+                    btn.innerText = "Copied";
+                }, 2000);
+            }, function (err) {
+                console.error("Error while copying: ", err);
+            });
+        }
+
+        function showLockedModal() {
+            document.getElementById('lockedModalOverlay').classList.add('show');
+        }
+
+        function closeLockedModal() {
+            document.getElementById('lockedModalOverlay').classList.remove('show');
+        }
+
+        function overlayClick(e) {
+            if (e.target.id === 'lockedModalOverlay') {
+                closeLockedModal();
+            }
+        }
+    </script>
+
+    <script>
+        document.getElementById("menu-toggle").addEventListener("click", function () {
+            document.querySelector(".sidebar").classList.toggle("active");
+        });
+    </script>
+
+
+</body>
+
+</html>
